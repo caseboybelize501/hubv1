@@ -1,0 +1,85 @@
+{
+  "name": "hubv1",
+  "displayName": "HubV1 - Local AI Assistant",
+  "description": "VS Codium extension for local LLM inference with Cline/Continue integration",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "hubv1.scanModels",
+        "title": "HubV1: Scan Models",
+        "icon": "$(search)"
+      },
+      {
+        "command": "hubv1.openModelPanel",
+        "title": "HubV1: Open Model Panel",
+        "icon": "$(folder-opened)"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "hubv1.scanModels",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "hubv1-view-container",
+          "title": "HubV1",
+          "icon": "$(ai)"
+        }
+      ]
+    },
+    "views": {
+      "hubv1-view-container": [
+        {
+          "id": "hubv1-models",
+          "name": "Model Manager"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^16.18.34",
+    "@types/vscode": "^1.70.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "eslint": "^8.38.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4",
+    "vscode-test": "^1.6.1"
+  },
+  "dependencies": {
+    "llama-cpp-prebuild": "^latest",
+    "onnxruntime-node": "^latest",
+    "@tensorflow/tfjs-node": "^latest",
+    "sqlite3": "^latest",
+    "react": "^18.x",
+    "vscode-webview": "^latest"
+  }
+}
